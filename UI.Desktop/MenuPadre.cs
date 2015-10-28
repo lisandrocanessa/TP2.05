@@ -25,6 +25,10 @@ namespace UI.Desktop
 
         private void iniciarSesion()
         {
+            this.tsmiAdministrador.Visible = false;
+            this.tsmiReportes.Visible = false;
+            this.tsmiDocente.Visible = false;
+            this.tsmiAlumno.Visible = false;
             if (UsuarioSesion.Sesion == null)
             {
                 Login l = new Login();
@@ -35,9 +39,28 @@ namespace UI.Desktop
                 }
                 else
                 {
-                    this.lblApellido.Text = UsuarioSesion.Sesion.Apellido;
-                    this.lblNombre.Text = UsuarioSesion.Sesion.Nombre;
-                    this.lblTipo.Text = UsuarioSesion.Sesion.TipoPersona.ToString();
+                    this.lblApellido.Text = UsuarioSesion.Sesion.Apellido.ToUpper();
+                    this.lblNombre.Text = UsuarioSesion.Sesion.Nombre.ToUpper();
+                    this.lblTipo.Text = UsuarioSesion.Sesion.TipoPersona.ToString().ToUpper();
+                    if (UsuarioSesion.Sesion.TipoPersona.ToString() == "Alumno")
+                    {
+                        this.tsmiAdministrador.Visible= false;
+                        this.tsmiReportes.Visible = false;
+                        this.tsmiDocente.Visible = false;
+                    }
+                    else if (UsuarioSesion.Sesion.TipoPersona.ToString() == "Docente")
+                    {
+                        this.tsmiAdministrador.Visible = false;
+                        this.tsmiReportes.Visible = false;
+                        this.tsmiAlumno.Visible = false;
+                    }
+                    else                    
+                    {
+                        this.tsmiAdministrador.Visible = true;
+                        this.tsmiReportes.Visible = true;
+                        this.tsmiDocente.Visible = true;
+                        this.tsmiAlumno.Visible = true;
+                    }
                 }
             }
             
@@ -51,6 +74,9 @@ namespace UI.Desktop
         private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UsuarioSesion.Sesion = null;
+            this.lblApellido.Text = "";
+            this.lblNombre.Text = "";
+            this.lblTipo.Text = "";
             this.iniciarSesion();
             
         }
