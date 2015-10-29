@@ -77,8 +77,7 @@ namespace UI.Desktop
             this.lblApellido.Text = "";
             this.lblNombre.Text = "";
             this.lblTipo.Text = "";
-            this.iniciarSesion();
-            
+            this.iniciarSesion();            
         }
 
         private void verDocentesToolStripMenuItem_Click(object sender, EventArgs e)
